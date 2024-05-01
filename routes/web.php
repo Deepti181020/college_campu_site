@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Admin\AdminLoginController;
 
 
 /*
@@ -30,3 +31,15 @@ Route::post('post-login', [UserController::class, 'postLogin'])->name('login.pos
 Route::post('post-registration', [UserController::class, 'postRegistration'])->name('registration.post');
 Route::get('index', [UserController::class, 'index']);
 // Route::get('logout', [UserAuthController::class, 'logout'])->name('logout');
+//Routes for Admin login and operations
+// Route::get('/admin/login',[AdminLoginController::class,'index'])->name('admin.login');
+Route::group(['prefix' => 'admin'],function(){
+
+  Route::group(['middleware' => 'admin.guest'],function(){
+  }); 
+
+  Route::group(['middleware' => 'admin.auth'],function(){
+}); 
+
+
+});
