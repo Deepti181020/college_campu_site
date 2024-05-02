@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Aupport\Facades\Auth;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class AdminRedirectIfAuthenticated
@@ -14,9 +14,10 @@ class AdminRedirectIfAuthenticated
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next,string ...$guards): Response
+    public function handle(Request $request, Closure $next,string ...$guards)
     {
         if(Auth::guard('admin')->check()){
+            //Rideirect them into admin dashboard
 
         }
         return $next($request);

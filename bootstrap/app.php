@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+// use Illuminate\Routing\MiddlewareNameResolver;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -12,15 +13,13 @@ return Application::configure(basePath: dirname(__DIR__))
         channels: __DIR__.'/../routes/channels.php',
         health: '/up',
     )
-    ->withMiddleware(function (Middleware $middleware) {
+    ->withMiddleware(function ($middleware) {
         $middleware->alias([
-            'admin.auth'=> App\Http\Middleware\AdminAuthenticate::class,
+            'admin.auth' => \App\Http\Middleware\AdminAuthenticate::class,
+            'admin.guest' => \App\Http\Middleware\AdminRedirectIfAuthenticated::class,
         ]);
-        $middleware->alias([
-            'admin.guest'=> App\Http\Middleware\AdminReirectIfAuthenticated::class,
-        ]);
-
     })
+    
     ->withExceptions(function (Exceptions $exceptions) {
         //
     })->create();

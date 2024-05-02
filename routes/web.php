@@ -25,18 +25,20 @@ Route::get('/about', function(){
 Route::get('/contact', function(){
     return view('contact');
 })->name('contact');
-Route::get('login', [UserController::class, 'index'])->name('login');
+Route::get('/userlogin', [UserController::class, 'index'])->name('login');
 Route::get('/registration', [UserController::class, 'registration'])->name('registration');
 Route::post('post-login', [UserController::class, 'postLogin'])->name('login.post');
 Route::post('post-registration', [UserController::class, 'postRegistration'])->name('registration.post');
-Route::get('index', [UserController::class, 'index']);
-// Route::get('logout', [UserAuthController::class, 'logout'])->name('logout');
-//Routes for Admin login and operations
-// Route::get('/admin/login',[AdminLoginController::class,'index'])->name('admin.login');
+// Route::get('index', [UserController::class, 'index']);
+Route::get('/admin/login',[AdminLoginController::class,'index'])->name('admin.login');
 Route::group(['prefix' => 'admin'],function(){
 
-  Route::group(['middleware' => 'admin.guest'],function(){
+    Route::group(['middleware' => 'admin.guest'],function(){
+    // Route::get('/login',[AdminLoginController::class,'index'])->name('admin.login');
+    Route::post('/authenticate',[AdminLoginController::class,'authenticate'])->name('admin.authenticate');
+
   }); 
+  //Routes for authenticated user
 
   Route::group(['middleware' => 'admin.auth'],function(){
 }); 

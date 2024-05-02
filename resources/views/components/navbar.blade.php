@@ -38,7 +38,7 @@
           <a class="nav-link fw-bold "href="{{ url('login') }}" >Login/SignUp</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link fw-bold "href="{{'adminLog') }}" >Admin</a>
+          <a class="nav-link fw-bold "href="{{ url('adminLog') }}" >Admin</a>
         </li>
     
       </ul>

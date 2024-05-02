@@ -21,7 +21,7 @@ class AdminAuthenticate
     }
     protected function authenticate($resquest,array $guards)
     {
-        if($this->auth->guard('admin')->check()){
+        if(Auth::guard('admin')->check()){
             return $this->auth->shouldUse('admin');
         }
         $this->unauthenticated($request,['admin']);
